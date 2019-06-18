@@ -1,8 +1,8 @@
-<section class="booklist">
+<section class="book-list">
   <ul class="grid">
     <%= for book <- @books do %>
-      <li class="griditem">
-        <div class="book booksmall">
+      <li class="grid-item">
+        <div class="book book-small">
           <%= link to: book_path(@conn, :show, book.id) do %>
             <img class="book__image" src="<%= book.image_url %>">
             <h2 class="book__title"><%= book.title %></h2>

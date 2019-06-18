@@ -12,18 +12,15 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
   <body>
-    <nav class="mainnav">
-      <a class="mainnav__
-      logo" href="/"></a>
+    <nav class="main-nav">
+      <a class="main-nav__logo" href="/"></a>
     </nav>
     <main class="content">
       <%= if message=get_flash(@conn, :info) do %>
-      <p class="alert alertinfo"
-      role="alert"><%= message %></p>
+      <p class="alert alert-info" role="alert"><%= message %></p>
       <% end %>
       <%= if message=get_flash(@conn, :error) do %>
-      <p class="alert alertdanger"
-      role="alert"><%= message %></p>
+      <p class="alert alert-danger" role="alert"><%= message %></p>
       <% end %>
       <%= render @view_module, @view_template, assigns %>
     </main>
