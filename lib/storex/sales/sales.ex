@@ -15,6 +15,16 @@ defmodule Storex.Sales do
   end
 
   def add_book_to_cart(book, cart) do
-    
+    line_item = Repo.get_by(LineItem, book_id: book.id, cart_id: cart.id)
+
+    if line_item do
+      line_item
+      |> LineItem.changeset(%{quantity: line_item.quantity + 1})
+      |> Repo.update()
+    else
+      %LineItem{book_id: book.id, cart_id: cart.id}
+      |> LineItem.changeset(%{quantity: 1})
+      |> Repo.insert()
+    end
   end
 end
