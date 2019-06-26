@@ -27,4 +27,23 @@ defmodule Storex.Sales do
       |> Repo.insert()
     end
   end
+
+  def remove_book_from_cart(book, cart) do
+    line_item = Repo.get_by!(LineItem, book_id: book.id, cart_id: cart.id)
+
+    if line_item.quantity > 1 do
+      line_item
+      |> LineItem.changeset(%{quantity: line_item.quantity - 1})
+      |> Repo.update()
+    else
+      Repo.delete!(line_item)
+    end
+  end
+
+  def list_line_items(cart) do
+    LineItem
+    |> where(cart_id: ^cart.id)
+    |> preload(:book)
+    |> Repo.all()
+  end
 end
